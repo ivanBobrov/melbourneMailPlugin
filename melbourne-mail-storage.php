@@ -2,14 +2,14 @@
 /**
  * Plugin Name: Melbourne mail storage
  * GitHub Plugin URI: https://github.com/ivanBobrov/melbourneMailPlugin
- * Version: 1.0.1
+ * Version: 1.0.2
  */
 defined( 'ABSPATH' ) or die( 'Wrong script execution' );
 
 //require( plugin_dir_path( __FILE__ ) . 'db-storage.php' );
 
 class MelbourneMailStorage {
-	const DB_VERSION_ID = '1';
+	const DB_VERSION_ID = '2';
 	const DB_VERSION_OPTION_NAME = 'melbourne_mail_storage_plugin_db_version';
 	const DB_TABLE_NAME = 'melbourne_mail';
 	const DB_TABLE_TEMP_NAME = 'melbourne_mail_temp';
@@ -25,13 +25,7 @@ class MelbourneMailStorage {
 	}
 	
 	public function setDatabase() {
-		if ($this->tableExists($this->tableName)) {
-			if (!$this->tableExists($this->tempTableName)) {
-				$this->oldTableReplace();
-				$this->createTable();
-				$this->copyFromOldTable();
-			}
-		} else {
+		if (!$this->tableExists($this->tableName)) {
 			$this->createTable();
 		}
 		
@@ -50,17 +44,6 @@ class MelbourneMailStorage {
 				insert_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 			);
 		");
-	}
-	
-	function oldTableReplace() {
-		$this->wpdb->query("RENAME TABLE $this->tableName TO $this->tempTableName;");
-	}
-	
-	function copyFromOldTable() {
-		$oldMails = $this->wpdb->get_results("SELECT mail, TIMESTAMP(insert_date) as insert_date FROM $this->tempTableName;");
-		foreach ($oldMails as $mail) {
-			$this->wpdb->insert($this->tableName, array('email' => $mail->mail, 'insert_date' => $mail->insert_date));
-		}
 	}
 	
 	function tableExists($table) {
