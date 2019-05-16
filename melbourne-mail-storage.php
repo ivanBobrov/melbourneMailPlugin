@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Melbourne mail storage
  * GitHub Plugin URI: https://github.com/ivanBobrov/melbourneMailPlugin
- * Version: 1.0.0
+ * Version: 1.0.1
  */
 defined( 'ABSPATH' ) or die( 'Wrong script execution' );
 
@@ -11,8 +11,8 @@ defined( 'ABSPATH' ) or die( 'Wrong script execution' );
 class MelbourneMailStorage {
 	const DB_VERSION_ID = '1';
 	const DB_VERSION_OPTION_NAME = 'melbourne_mail_storage_plugin_db_version';
-	const DB_TABLE_NAME = 'MELBOURNE_MAIL';
-	const DB_TABLE_TEMP_NAME = 'MELBOURNE_MAIL_TEMP';
+	const DB_TABLE_NAME = 'melbourne_mail';
+	const DB_TABLE_TEMP_NAME = 'melbourne_mail_temp';
 	
 	var $tableName;
 	var $tempTableName;
