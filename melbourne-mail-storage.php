@@ -1,6 +1,7 @@
 <?php
 /**
  * Plugin Name: Melbourne mail storage
+ * GitHub Plugin URI: https://github.com/ivanBobrov/melbourneMailPlugin
  * Version: 1.0.0
  */
 defined( 'ABSPATH' ) or die( 'Wrong script execution' );
